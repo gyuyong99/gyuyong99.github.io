@@ -39,17 +39,18 @@
 <body>
   <div class="viewport" id="viewport">
     <!-- 초청장 원본 이미지: 저장소 루트에 photo.jpg 업로드되어 있어야 합니다. -->
-    <img id="inviteImg" class="img" src="photo.jpg" alt="초청장"><div class="controls">
+    <img id="inviteImg" class="img" src="/photo.jpg" alt="초청장" onerror="document.getElementById('imgFail').style.display='block'"><div class="controls">
   <button id="zoomIn" class="btn" aria-label="확대">＋</button>
   <button id="zoomOut" class="btn" aria-label="축소">－</button>
   <button id="reset" class="btn" aria-label="원래대로">⟳</button>
 </div>
 
-  </div>  <div class="panel">
+  </div>
+  <div id="imgFail" style="display:none;padding:10px 14px;background:#330; color:#fff; text-align:center;">이미지를 불러오지 못했습니다. <a href='/photo.jpg' style='color:#fff;text-decoration:underline'>여기를 눌러 직접 열기</a></div>  <div class="panel">
     <h2>행사 안내</h2>
     <div class="row" style="margin-bottom:10px;">
       <a class="link-btn" href="tel:01023721646">📞 연락처</a>
-      <a class="link-btn" href="photo.jpg" download="초청장.jpg">💾 이미지 저장</a>
+      <a class="link-btn" href="/photo.jpg" download="초청장.jpg">💾 이미지 저장</a>
       <a class="link-btn" href="https://naver.me/5NMbVFOH" target="_blank" rel="noopener">📍 지도 열기</a>
     </div><div class="meta">
   <div><strong>주소</strong> — 강원특별자치도 동해시 강원남부로 4652-7 2138부대</div>
