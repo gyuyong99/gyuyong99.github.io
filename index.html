@@ -1,32 +1,95 @@
 <!doctype html>
+
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>초청장</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>초청장</title>  <!-- Open Graph / Social preview -->  <!-- 썸네일을 호랑이로 유지하려면 tiger.jpg를 저장소에 올리고 아래 og:image를 tiger.jpg로 바꿔도 됩니다. -->  <meta property="og:type" content="website" />
+  <meta property="og:title" content="초청장 안내" />
+  <meta property="og:description" content="제2·3대 대대장 이·취임식 초청장" />
+  <meta property="og:image" content="https://gyuyong99.github.io/invite.jpg" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="초청장 안내" />
+  <meta name="twitter:description" content="제2·3대 대대장 이·취임식 초청장" />
+  <meta name="twitter:image" content="https://gyuyong99.github.io/invite.jpg" />  <style>
+    :root { --btn-bg: rgba(0,0,0,.6); --btn-text:#fff; --accent:#06c; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; background: #000; color:#fff; font-family: system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Apple SD Gothic Neo, sans-serif; }
+    .viewport { position: relative; height: 60vh; max-height: 80vh; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .img { max-width: 100%; max-height: 100%; transform-origin: center center; transition: transform .12s ease; user-select:none; -webkit-user-drag: none; }
+    .controls { position: absolute; top: 12px; right: 12px; display:flex; gap:8px; z-index: 10; }
+    .btn { padding: 10px 12px; border-radius: 10px; background: var(--btn-bg); color: var(--btn-text); border: 1px solid rgba(255,255,255,.2); cursor: pointer; font-weight:600; backdrop-filter: blur(6px); }
+    .btn:active { transform: translateY(1px); }
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="초청장 안내">
-  <meta property="og:description" content="제2·3대 대대장 이·취임식 초청장">
-  <meta property="og:image" content="https://thumb2.photo.mybox.naver.com/3472598069517483584?type=m1280_1280_2&authtoken=m/fNIe63q5rhCay7TZX0HgI=&filelink=Fol+h2e0+0+srY+HT0PyXrYIDR5LhHTPZgyQBewo7vmYhPkua8mnzW+QtaqqkyHSc0XFDScmjk0ZoZZxnvmJbQI=">
-  <meta property="og:image:alt" content="호랑이 로고">
+    .panel { padding: 16px; background:#0b0b0b; border-top: 1px solid rgba(255,255,255,.08); }
+    .panel h2 { margin: 0 0 10px; font-size: 16px; color:#ddd; }
+    .row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+    .link-btn { display:inline-flex; align-items:center; gap:8px; padding:12px 14px; border-radius:10px; background:#111; border:1px solid rgba(255,255,255,.12); color:#fff; text-decoration:none; }
+    .link-btn:hover { border-color: rgba(255,255,255,.32); }
+    .meta { margin-top: 14px; font-size: 14px; color:#cfcfcf; line-height:1.6; }
+    .bullet { margin: 8px 0 0 0; padding-left: 18px; }
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="초청장 안내">
-  <meta name="twitter:description" content="제2·3대 대대장 이·취임식 초청장">
-  <meta name="twitter:image" content="https://thumb2.photo.mybox.naver.com/3472598069517483584?type=m1280_1280_2&authtoken=m/fNIe63q5rhCay7TZX0HgI=&filelink=Fol+h2e0+0+srY+HT0PyXrYIDR5LhHTPZgyQBewo7vmYhPkua8mnzW+QtaqqkyHSc0XFDScmjk0ZoZZxnvmJbQI=">
-
-  <style>
-    html,body{height:100%;margin:0;background:#000}
-    .wrap{height:100%;display:flex;align-items:center;justify-content:center}
-    img{max-width:100%;max-height:100%;object-fit:contain}
-  </style>
-</head>
+    /* 작은 기기 최적화 */
+    @media (max-width: 480px) {
+      .viewport { height: 70vh; }
+      .btn { padding:9px 10px; }
+    }
+  </style></head>
 <body>
-  <div class="wrap">
-    <img src="photo.jpg" alt="초청장">
-  </div>
-</body>
+  <div class="viewport" id="viewport">
+    <!-- 초청장 원본 이미지: 저장소 루트에 invite.jpg 업로드되어 있어야 합니다. -->
+    <img id="inviteImg" class="img" src="invite.jpg" alt="초청장"><div class="controls">
+  <button id="zoomIn" class="btn" aria-label="확대">＋</button>
+  <button id="zoomOut" class="btn" aria-label="축소">－</button>
+  <button id="reset" class="btn" aria-label="원래대로">⟳</button>
+</div>
+
+  </div>  <div class="panel">
+    <h2>행사 안내</h2>
+    <div class="row" style="margin-bottom:10px;">
+      <a class="link-btn" href="invite.jpg" download="초청장.jpg">💾 이미지 저장</a>
+      <a class="link-btn" href="https://maps.app.goo.gl/BeuN55Qsf5ojaFW8A" target="_blank" rel="noopener">📍 지도 열기</a>
+    </div><div class="meta">
+  <div><strong>주소</strong> — 강원특별자치도 동해시 강원남부로 4652-7 2138부대</div>
+  <ul class="bullet">
+    <li>주차 가능</li>
+  </ul>
+</div>
+
+  </div>  <script>
+    (function(){
+      const img = document.getElementById('inviteImg');
+      const vp = document.getElementById('viewport');
+      const zoomIn = document.getElementById('zoomIn');
+      const zoomOut = document.getElementById('zoomOut');
+      const reset = document.getElementById('reset');
+
+      let scale = 1;
+      const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
+      function apply(){ img.style.transform = `scale(${scale})`; }
+
+      zoomIn.addEventListener('click', () => { scale = clamp(scale + 0.2, 0.5, 4); apply(); });
+      zoomOut.addEventListener('click', () => { scale = clamp(scale - 0.2, 0.5, 4); apply(); });
+      reset.addEventListener('click', () => { scale = 1; apply(); });
+
+      // 더블탭/더블클릭 확대 토글
+      let lastTap = 0;
+      vp.addEventListener('click', (e) => {
+        const now = Date.now();
+        if (now - lastTap < 300) { // 더블클릭
+          scale = (scale === 1) ? 2 : 1; apply();
+        }
+        lastTap = now;
+      });
+
+      // 모바일 핀치 확대(기본 브라우저 제스처 사용) 방해하지 않도록 별도 처리 없음
+      // 스크롤로 확대 (데스크톱)
+      vp.addEventListener('wheel', (e) => {
+        if (!e.ctrlKey) return; // 브라우저 기본 확대와 충돌 방지. Ctrl+휠일 때만 동작
+        e.preventDefault();
+        scale = clamp(scale + (e.deltaY < 0 ? 0.1 : -0.1), 0.5, 4); apply();
+      }, { passive:false });
+    })();
+  </script></body>
 </html>
